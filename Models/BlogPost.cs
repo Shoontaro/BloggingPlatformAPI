@@ -8,6 +8,26 @@
         public string category { get; set; }
         public string[] tags { get; set; }
         public DateTime createdAt { get; set; }
-        public DateTime updatedAt { get; set; }
+        public DateTime? updatedAt { get; set; }
+
+        public BlogPost() { }
+
+        public BlogPost(string title, string content, string category, string[] tags)
+        { 
+            this.title = title;
+            this.content = content;
+            this.category = category;
+            this.tags = tags;
+            createdAt = DateTime.Now;
+        }
+
+        public static List<BlogPost> Seeds() //балванка 
+        { 
+            return new List<BlogPost>() { 
+               new BlogPost("title1", "content1", "category1", ["one", "two"]),
+               new BlogPost("title2", "content2", "category2", ["one", "two"]),
+               new BlogPost("title3", "content3", "category3", ["one", "two"])
+            };
+        }
     }
 }

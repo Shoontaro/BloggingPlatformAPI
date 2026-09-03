@@ -4,3 +4,12 @@ GET {{BloggingPlatformAPI_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+
+GET {{BloggingPlatformAPI_HostAddress}}/posts/
+Accept: application/json
+
+###
+GET {{BloggingPlatformAPI_HostAddress}}/posts/4
+Accept: application/json
+
+###
