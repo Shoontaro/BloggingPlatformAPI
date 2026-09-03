@@ -9,7 +9,7 @@ GET {{BloggingPlatformAPI_HostAddress}}/posts/
 Accept: application/json
 
 ###
-GET {{BloggingPlatformAPI_HostAddress}}/posts/4
+GET {{BloggingPlatformAPI_HostAddress}}/posts/2
 Accept: application/json
 
 ###

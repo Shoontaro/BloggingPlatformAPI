@@ -20,9 +20,13 @@ namespace BloggingPlatformAPI.Controllers
 
         // GET posts/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<BlogPost> Get(int id)
         {
-            return $"value {id}";
+            BlogPost post = BlogPost.Seeds().Find(v => v.id == id);
+
+            if ( post == null) { return NotFound(); }
+
+            return post;
         }
 
         // POST api/<BlogController>

@@ -19,14 +19,19 @@
             this.category = category;
             this.tags = tags;
             createdAt = DateTime.Now;
+            updatedAt = DateTime.Now;
+        }
+        public BlogPost(int id, string title, string content, string category, string[] tags):this(title, content, category, tags)
+        { 
+            this.id = id;
         }
 
         public static List<BlogPost> Seeds() //балванка 
         { 
             return new List<BlogPost>() { 
-               new BlogPost("title1", "content1", "category1", ["one", "two"]),
-               new BlogPost("title2", "content2", "category2", ["one", "two"]),
-               new BlogPost("title3", "content3", "category3", ["one", "two"])
+               new BlogPost(0, "title1", "content1", "category1", ["one", "two"]),
+               new BlogPost(1, "title2", "content2", "category2", ["one", "two"]),
+               new BlogPost(2, "title3", "content3", "category3", ["one", "two"])
             };
         }
     }
