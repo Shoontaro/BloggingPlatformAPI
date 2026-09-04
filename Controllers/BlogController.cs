@@ -12,10 +12,16 @@ namespace BloggingPlatformAPI.Controllers
      
         // GET: posts/
         [HttpGet]
-        public ActionResult<List<BlogPost>> Get() 
+        public ActionResult<List<BlogPost>> Get(string? title) 
         {
-            return BlogService.GetAll();
+            List<BlogPost> data = BlogService.GetAll();
+
+            if (!string.IsNullOrEmpty(title)) data = data.Where(v=>v.title.Trim().ToLower().Contains(title.Trim().ToLower())).ToList();
+
+            return data;
         }
+
+
 
         // GET posts/5
         [HttpGet("{id}")]
