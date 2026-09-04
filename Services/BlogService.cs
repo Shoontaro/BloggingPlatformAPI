@@ -15,7 +15,7 @@ namespace BloggingPlatformAPI.Services
                new BlogPost(2, "title3", "content3", "category3", ["one", "two"])};
         }
 
-        public static List<BlogPost> GetAll => Posts;
+        public static List<BlogPost> GetAll() => Posts;
 
         public static BlogPost? Get(int id) => Posts.FirstOrDefault(v=>v.id == id);
 

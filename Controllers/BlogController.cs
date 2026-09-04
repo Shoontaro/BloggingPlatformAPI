@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using BloggingPlatformAPI.Models;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using BloggingPlatformAPI.Services;
 
 namespace BloggingPlatformAPI.Controllers
 {
@@ -15,14 +14,14 @@ namespace BloggingPlatformAPI.Controllers
         [HttpGet]
         public ActionResult<List<BlogPost>> Get() 
         {
-            return BlogPost.Seeds();
+            return BlogService.GetAll();
         }
 
         // GET posts/5
         [HttpGet("{id}")]
         public ActionResult<BlogPost> Get(int id)
         {
-            BlogPost post = BlogPost.Seeds().Find(v => v.id == id);
+            BlogPost? post = BlogService.Get(id);
 
             if ( post == null) { return NotFound(); }
 
