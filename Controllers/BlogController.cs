@@ -12,11 +12,14 @@ namespace BloggingPlatformAPI.Controllers
      
         // GET: posts/
         [HttpGet]
-        public ActionResult<List<BlogPost>> Get(string? title) 
+        public ActionResult<List<BlogPost>> Get(string? term) 
         {
             List<BlogPost> data = BlogService.GetAll();
 
-            if (!string.IsNullOrEmpty(title)) data = data.Where(v=>v.title.Trim().ToLower().Contains(title.Trim().ToLower())).ToList();
+            if (!string.IsNullOrEmpty(term)) data = data.Where(v=>
+            v.title.Trim().ToLower().Contains(term.Trim().ToLower()) ||
+            v.category.Trim().ToLower().Contains(term.Trim().ToLower()) ||
+            v.content.Trim().ToLower().Contains(term.Trim().ToLower())).ToList();
 
             return data;
         }
