@@ -31,8 +31,10 @@ namespace BloggingPlatformAPI.Controllers
 
         // POST api/<BlogController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Create([FromBody] BlogPost post)
         {
+            //PizzaService.Add(pizza);
+            return CreatedAtAction(nameof(Get), new { post.id }, post);
         }
 
         // PUT api/<BlogController>/5

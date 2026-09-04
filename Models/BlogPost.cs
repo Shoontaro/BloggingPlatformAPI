@@ -29,9 +29,9 @@
         public static List<BlogPost> Seeds() //балванка 
         { 
             return new List<BlogPost>() { 
-               new BlogPost(0, "title1", "content1", "category1", ["one", "two"]),
-               new BlogPost(1, "title2", "content2", "category2", ["one", "two"]),
-               new BlogPost(2, "title3", "content3", "category3", ["one", "two"])
+               new BlogPost(1, "title1", "content1", "category1", ["one", "two"]),
+               new BlogPost(2, "title2", "content2", "category2", ["one", "two"]),
+               new BlogPost(3, "title3", "content3", "category3", ["one", "two"])
             };
         }
     }
