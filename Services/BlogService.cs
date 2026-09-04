@@ -10,9 +10,9 @@ namespace BloggingPlatformAPI.Services
         static BlogService()
         {
             Posts = new List<BlogPost>() {
-               new BlogPost(0, "title1", "content1", "category1", ["one", "two"]),
-               new BlogPost(1, "title2", "content2", "category2", ["one", "two"]),
-               new BlogPost(2, "title3", "content3", "category3", ["one", "two"])};
+               new BlogPost(1, "title1", "content1", "category1", ["one", "two"]),
+               new BlogPost(2, "title2", "content2", "category2", ["one", "two"]),
+               new BlogPost(3, "title3", "content3", "category3", ["one", "two"])};
         }
 
         public static List<BlogPost> GetAll() => Posts;
@@ -22,6 +22,9 @@ namespace BloggingPlatformAPI.Services
         public static void Add(BlogPost post)
         {
             post.id = nextId++;
+            post.createdAt = DateTime.Now;
+            post.updatedAt = DateTime.Now;
+
             Posts.Add(post);   
         }
 
@@ -39,6 +42,9 @@ namespace BloggingPlatformAPI.Services
             var index = Posts.FindIndex(p => p.id == post.id);
             if (index == -1)
                 return;
+
+            post.createdAt = Posts[index].createdAt;
+            post.updatedAt = DateTime.Now;
 
             Posts[index] = post;
         }

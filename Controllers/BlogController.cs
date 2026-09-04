@@ -38,7 +38,7 @@ namespace BloggingPlatformAPI.Controllers
 
         // PUT posts/5
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] BlogPost post)
+        public IActionResult Put(int id, BlogPost post)
         {
             if (id != post.id)
                 return BadRequest();

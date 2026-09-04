@@ -21,6 +21,7 @@
             createdAt = DateTime.Now;
             updatedAt = DateTime.Now;
         }
+
         public BlogPost(int id, string title, string content, string category, string[] tags):this(title, content, category, tags)
         { 
             this.id = id;
