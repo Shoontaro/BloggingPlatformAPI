@@ -34,7 +34,7 @@ namespace BloggingPlatformAPI.Services
             Posts.Remove(post);
         }
 
-        public static void Upload(BlogPost post, int id)
+        public static void Upload(BlogPost post)
         {
             var index = Posts.FindIndex(p => p.id == post.id);
             if (index == -1)

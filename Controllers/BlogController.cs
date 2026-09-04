@@ -28,24 +28,42 @@ namespace BloggingPlatformAPI.Controllers
             return post;
         }
 
-        // POST api/<BlogController>
+        // POST posts
         [HttpPost]
         public IActionResult Create([FromBody] BlogPost post)
         {
-            //PizzaService.Add(pizza);
+            BlogService.Add(post);
             return CreatedAtAction(nameof(Get), new { post.id }, post);
         }
 
-        // PUT api/<BlogController>/5
+        // PUT posts/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Put(int id, [FromBody] BlogPost post)
         {
+            if (id != post.id)
+                return BadRequest();
+
+            var existingPost = BlogService.Get(id);
+            if (existingPost is null)
+                return NotFound();
+
+            BlogService.Upload(post);
+
+            return NoContent();
         }
 
-        // DELETE api/<BlogController>/5
+        // DELETE posts/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            var post = BlogService.Get(id);
+
+            if (post is null)
+                return NotFound();
+
+            BlogService.Delete(id);
+
+            return NoContent();
         }
     }
 }
