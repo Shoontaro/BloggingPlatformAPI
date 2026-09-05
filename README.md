@@ -9,3 +9,5 @@ The API allow users to perform the following operations:
 - Get a single blog post
 - Get all blog posts
 - Filter blog posts by a search term
+
+Blogging Platform API url https://roadmap.sh/projects/blogging-platform-api
