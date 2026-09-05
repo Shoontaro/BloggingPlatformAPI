@@ -7,7 +7,7 @@ namespace BloggingPlatformAPI.DB
     {
         public AppDBContext(DbContextOptions<AppDBContext> options) : base(options)
         {
-            Database.EnsureCreated();
+           // Database.EnsureCreated();
         }
         public DbSet<BlogPost> Posts { get; set; }
 

@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BloggingPlatformAPI.DB;
 using BloggingPlatformAPI.Models;
 using BloggingPlatformAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BloggingPlatformAPI.Controllers
 {
@@ -8,13 +9,20 @@ namespace BloggingPlatformAPI.Controllers
     [ApiController]
     public class BlogController : ControllerBase
     {
-        public BlogController() { }
-     
+        
+        BlogService blog;
+        //public BlogController() { }
+
+        public BlogController(AppDBContext context)
+        { 
+            blog = new BlogService(context);
+        }
+
         // GET: posts?term
         [HttpGet]
         public ActionResult<List<BlogPost>> Get(string? term) 
         {
-            List<BlogPost> data = BlogService.GetAll();
+            List<BlogPost> data = blog.GetAll();
 
             if (!string.IsNullOrEmpty(term)) data = data.Where(v=>
             v.title.Trim().ToLower().Contains(term.Trim().ToLower()) ||
@@ -28,7 +36,7 @@ namespace BloggingPlatformAPI.Controllers
         [HttpGet("{id}")]
         public ActionResult<BlogPost> Get(int id)
         {
-            BlogPost? post = BlogService.Get(id);
+            BlogPost? post = blog.Get(id);
 
             if ( post == null) { return NotFound(); }
 
@@ -39,7 +47,8 @@ namespace BloggingPlatformAPI.Controllers
         [HttpPost]
         public IActionResult Create([FromBody] BlogPost post)
         {
-            BlogService.Add(post);
+            blog.Add(post);
+           
             return CreatedAtAction(nameof(Get), new { post.id }, post);
         }
 
@@ -50,11 +59,11 @@ namespace BloggingPlatformAPI.Controllers
             if (id != post.id)
                 return BadRequest();
 
-            var existingPost = BlogService.Get(id);
+            var existingPost = blog.Get(id);
             if (existingPost is null)
                 return NotFound();
 
-            BlogService.Upload(post);
+            blog.Upload(id, post);
 
             return NoContent();
         }
@@ -63,12 +72,12 @@ namespace BloggingPlatformAPI.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var post = BlogService.Get(id);
+            var post = blog.Get(id);
 
             if (post is null)
                 return NotFound();
 
-            BlogService.Delete(id);
+            blog.Delete(id);
 
             return NoContent();
         }

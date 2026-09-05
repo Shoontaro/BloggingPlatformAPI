@@ -1,52 +1,55 @@
-﻿using BloggingPlatformAPI.Models;
+﻿using BloggingPlatformAPI.DB;
+using BloggingPlatformAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BloggingPlatformAPI.Services
 {
     public class BlogService
     {
-        static int nextId = 4;
-        static List<BlogPost> Posts { get; }
+        //int nextId = 4;
+       // List<BlogPost> Posts { get; }
+        AppDBContext db;
 
-        static BlogService()
+        public BlogService(AppDBContext db)
         {
-            Posts = new List<BlogPost>() {
-               new BlogPost(1, "title1", "content1", "category1", ["one", "two"]),
-               new BlogPost(2, "title2", "content2", "category2", ["one", "two"]),
-               new BlogPost(3, "title3", "content3", "category3", ["one", "two"])};
+            this.db = db;
         }
 
-        public static List<BlogPost> GetAll() => Posts;
+        public List<BlogPost> GetAll() => db.Posts.ToList();
 
-        public static BlogPost? Get(int id) => Posts.FirstOrDefault(v=>v.id == id);
+        public BlogPost? Get(int id) => db.Posts.FirstOrDefault(v=>v.id == id);
 
-        public static void Add(BlogPost post)
+        public void Add(BlogPost post)
         {
-            post.id = nextId++;
             post.createdAt = DateTime.Now;
             post.updatedAt = DateTime.Now;
 
-            Posts.Add(post);   
+            db.Posts.Add(post);
+            db.SaveChanges();
         }
 
-        public static void Delete(int id)
+        public void Delete(int id)
         {
             var post = Get(id);
             if (post is null)
                 return;
 
-            Posts.Remove(post);
+            db.Posts.Remove(post);
+            db.SaveChanges();
         }
 
-        public static void Upload(BlogPost post)
+        public void Upload(int id, BlogPost post)
         {
-            var index = Posts.FindIndex(p => p.id == post.id);
-            if (index == -1)
-                return;
+            BlogPost? exPost = db.Posts.ToList().Find(v=>v.id == id);
+            if (exPost == null) return;
 
-            post.createdAt = Posts[index].createdAt;
-            post.updatedAt = DateTime.Now;
+            exPost.title = post.title;
+            exPost.tags = post.tags;
+            exPost.content = post.content;
+            exPost.category = post.category;
+            exPost.updatedAt = DateTime.Now;
 
-            Posts[index] = post;
+            db.SaveChanges();
         }
     }
 }

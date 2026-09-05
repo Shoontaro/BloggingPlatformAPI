@@ -9,7 +9,7 @@ GET {{BloggingPlatformAPI_HostAddress}}/posts/
 Accept: application/json
 
 ###
-GET {{BloggingPlatformAPI_HostAddress}}/posts?term=cat
+GET {{BloggingPlatformAPI_HostAddress}}/posts?term=3
 Accept: application/json
 
 ###
@@ -21,9 +21,8 @@ Accept: application/json
 
 POST {{BloggingPlatformAPI_HostAddress}}/posts/
 Content-Type: application/json
-
 {
-    "title": "title_new",
+    "title": "title_new3",
     "content": "content_new",
     "category": "category_new",
     "tags": ["new1", "new2"]
@@ -33,17 +32,16 @@ Content-Type: application/json
 
 PUT {{BloggingPlatformAPI_HostAddress}}/posts/2
 Content-Type: application/json
-
 {
     "id": 2,
-    "title": "title_new",
-    "content": "content_new",
+    "title": "title_new_update",
+    "content": "content_new_update",
     "category": "category_new",
     "tags": ["new1", "new2"]
 }
 
 ###
 
-DELETE {{BloggingPlatformAPI_HostAddress}}/posts/2
+DELETE {{BloggingPlatformAPI_HostAddress}}/posts/1
 
 ###
