@@ -10,7 +10,7 @@ namespace BloggingPlatformAPI.Controllers
     {
         public BlogController() { }
      
-        // GET: posts/
+        // GET: posts?term
         [HttpGet]
         public ActionResult<List<BlogPost>> Get(string? term) 
         {
@@ -23,8 +23,6 @@ namespace BloggingPlatformAPI.Controllers
 
             return data;
         }
-
-
 
         // GET posts/5
         [HttpGet("{id}")]
