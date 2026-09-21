@@ -6,8 +6,6 @@ namespace BloggingPlatformAPI.Services
 {
     public class BlogService
     {
-        //int nextId = 4;
-       // List<BlogPost> Posts { get; }
         AppDBContext db;
 
         public BlogService(AppDBContext db)

@@ -42,6 +42,6 @@ Content-Type: application/json
 
 ###
 
-DELETE {{BloggingPlatformAPI_HostAddress}}/posts/1
+DELETE {{BloggingPlatformAPI_HostAddress}}/posts/4
 
 ###
